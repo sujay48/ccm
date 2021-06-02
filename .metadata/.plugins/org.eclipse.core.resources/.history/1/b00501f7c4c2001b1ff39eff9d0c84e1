@@ -1,0 +1,46 @@
+package com.cognizant.ccm.service;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import com.cognizant.ccm.exception.GatewaySettingsParametersNotFoundException;
+import com.cognizant.ccm.model.GatewaySettingsParameters;
+import com.cognizant.ccm.repository.GatewaySettingsParameterRepository;
+
+@ExtendWith(MockitoExtension.class)
+class GatewaySettingsServiceTest {
+
+	@Mock
+	private GatewaySettingsParameterRepository gatewaySettingsParametersRepository;
+
+	@Mock
+	private GatewaySettingsMapper gatewaySettingsMapper;
+	
+	@InjectMocks
+	private GatewaySettingsServiceImpl gatewaySettingsServiceImpl;
+	
+	private GatewaySettingsParameters gatewaySettings = new GatewaySettingsParameters();
+
+	@Test
+	void test_GetGatewaySettingsList() throws GatewaySettingsParametersNotFoundException {
+		List<GatewaySettingsParameters> gatewaySettingsParametersList = new ArrayList<GatewaySettingsParameters>();
+		gatewaySettingsParametersList.add(gatewaySettings);
+		Mockito.when(gatewaySettingsParametersRepository.findAll()).thenReturn(gatewaySettingsParametersList);
+		assertEquals(1, gatewaySettingsServiceImpl.getGatewaySettingsList().size());
+	}
+	
+	void test_GetGatewaySettingsListFail() {
+		Mockito.when(gatewaySettingsParametersRepository.findAll()).thenReturn(new ArrayList<>());
+		assertThrows(GatewaySettingsParametersNotFoundException.class, () -> gatewaySettingsServiceImpl.getGatewaySettingsList());
+	}
+}

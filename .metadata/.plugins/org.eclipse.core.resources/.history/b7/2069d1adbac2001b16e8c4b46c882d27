@@ -1,0 +1,27 @@
+package com.cognizant.ccm.service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+
+import com.cognizant.ccm.model.GatewaySettingsParameters;
+import com.cognizant.ccm.repository.GatewaySettingsParameterRepository;
+
+class GatewaySettingsServiceTest {
+
+	private GatewaySettingsSerivce gatewaySettingsService = new GatewaySettingsServiceImpl();
+	
+	@Mock
+	private GatewaySettingsParameterRepository gatewaySettingsParametersRepository;
+	
+	@Test
+	void test_GetGatewaySettingsList() {
+		List<GatewaySettingsParameters> gatewaySettingsParametersList = new ArrayList<>();
+		GatewaySettingsParameters gatewaySettingsParameters = new GatewaySettingsParameters();
+		gatewaySettingsParametersList.add(gatewaySettingsParameters);
+		Mockito.when(gatewaySettingsParametersRepository.findAll()).thenReturn(gatewaySettingsParametersList);
+	}
+}

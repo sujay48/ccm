@@ -1,0 +1,14 @@
+package com.cognizant.ccm.service;
+
+import java.util.List;
+
+import com.cognizant.ccm.model.GatewaySettings;
+
+public interface GatewaySettingsSerivce {
+
+	List<GatewaySettings> getGatewaySettingsList();
+
+	GatewaySettings getGatewaySettings(int id);
+
+	void addGatewayServiceParameters(GatewaySettings gatewaySettings);
+}

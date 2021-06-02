@@ -1,0 +1,9 @@
+com\cognizant\ccm\model\AuthResponseTest.class
+com\cognizant\ccm\service\GatewaySettingsServiceTest.class
+com\cognizant\ccm\CcmApplicationTests.class
+com\cognizant\ccm\exception\GlobalExceptionHandlerTest.class
+com\cognizant\ccm\model\GatewaySettingsTest.class
+com\cognizant\ccm\client\AuthorizationFallbackFactoryTest.class
+com\cognizant\ccm\controller\GatewaySettingsControllerTest.class
+com\cognizant\ccm\model\GatewaySettingsParametersTest.class
+com\cognizant\ccm\service\GatewaySettingsMapperTest.class

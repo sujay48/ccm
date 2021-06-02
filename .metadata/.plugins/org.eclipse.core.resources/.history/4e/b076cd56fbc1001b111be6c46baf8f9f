@@ -1,0 +1,61 @@
+package com.cognizant.ccm.model;
+
+import java.util.Date;
+
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+/**
+ * DTO Class for Gateway Settings Parameters
+ * @author Sujay
+ *
+ */
+@Getter
+@Setter
+@NoArgsConstructor
+public class GatewaySettings {
+	
+	private int gatewaySettingsParameterId;
+	@NotEmpty
+	@Size(min = 2, max = 10)
+	private String fieldCode;
+	@NotEmpty
+	@Size(min = 2, max = 20)
+	private String fieldName;
+	@NotEmpty
+	@Size(min = 2, max = 200)
+	private String fieldDescription;
+	@NotEmpty
+	@Size(min = 2, max = 10)
+	private String dataType;
+	@NotNull
+	private Boolean isrequired;
+	@NotEmpty
+	@Size(min = 2, max = 50)
+	private String dataFormat;
+	@NotEmpty
+	@Size(min = 2, max = 50)
+	private String fieldDefaultValue;
+	@NotEmpty
+	@Size(min = 2, max = 50)
+	private String maximumValue;
+	@NotEmpty
+	@Size(min = 2, max = 50)
+	private String minimumValue;
+	@NotEmpty
+	@Size(min = 2, max = 50)
+	private String fieldValue;
+	@NotEmpty
+	@Size(min = 2, max = 200)
+	private String affectedModules;
+	@NotNull
+	private Integer gatewayId;
+	private Date createdon;
+	private Date updatedon;
+	
+}

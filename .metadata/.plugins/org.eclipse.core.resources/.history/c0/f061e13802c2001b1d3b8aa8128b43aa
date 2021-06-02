@@ -1,0 +1,16 @@
+package com.cognizant.ccm.model;
+
+import static org.junit.Assert.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
+public class GatewaySettingsTest {
+
+	GatewaySettings gatewaySettings = new GatewaySettings();
+	
+	@Test
+	void test_GatewaySettingsParameterId() {
+		gatewaySettings.setGatewaySettingsParameterId(1);
+		assertEquals(1, gatewaySettings.getGatewaySettingsParameterId());
+	}
+}

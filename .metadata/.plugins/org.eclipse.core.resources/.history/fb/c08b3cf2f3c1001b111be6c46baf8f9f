@@ -1,0 +1,20 @@
+package com.cognizant.ccm;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.openfeign.EnableFeignClients;
+
+/**
+ * Main Class which Runs the Application
+ * @author Sujay
+ *
+ */
+@SpringBootApplication
+@EnableFeignClients
+public class CcmApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(CcmApplication.class, args);
+	}
+
+}

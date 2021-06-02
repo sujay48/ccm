@@ -1,0 +1,55 @@
+package com.cognizant.ccm.service;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import com.cognizant.ccm.exception.GatewaySettingsParametersNotFoundException;
+import com.cognizant.ccm.model.GatewaySettingsParameters;
+import com.cognizant.ccm.repository.GatewaySettingsParameterRepository;
+
+@ExtendWith(MockitoExtension.class)
+class GatewaySettingsServiceTest {
+
+	@Mock
+	private GatewaySettingsParameterRepository gatewaySettingsParametersRepository;
+
+	@InjectMocks
+	private GatewaySettingsServiceImpl gatewaySettingsServiceImpl;
+
+	@Test
+	void test_GetGatewaySettingsList() throws GatewaySettingsParametersNotFoundException {
+		List<GatewaySettingsParameters> gatewaySettingsParametersList = new ArrayList<GatewaySettingsParameters>();
+		GatewaySettingsParameters gatewaySettings = new GatewaySettingsParameters();
+
+		gatewaySettings.setGatewaySettingsParameterId(1);
+		gatewaySettings.setFieldCode("F001");
+		gatewaySettings.setFieldName("Field Name");
+		gatewaySettings.setFieldDescription("Field Description");
+		gatewaySettings.setDataType("Data type");
+		gatewaySettings.setIsrequired(true);
+		gatewaySettings.setDataFormat("dd/MM/yyyy");
+		gatewaySettings.setFieldDefaultValue("Default Value");
+		gatewaySettings.setMaximumValue("Maximum");
+		gatewaySettings.setMinimumValue("Minimum");
+		gatewaySettings.setFieldValue("Field Value");
+		gatewaySettings.setAffectedModules("Affected Modules");
+		gatewaySettings.setGatewayId(1);
+		Date date1 = new Date();
+		gatewaySettings.setCreatedon(date1);
+		Date date2 = new Date();
+		gatewaySettings.setUpdatedon(date2);
+		gatewaySettingsParametersList.add(gatewaySettings);
+		Mockito.when(gatewaySettingsParametersRepository.findAll()).thenReturn(gatewaySettingsParametersList);
+		assertEquals(1, gatewaySettingsServiceImpl.getGatewaySettingsList().size());
+	}
+}

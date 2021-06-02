@@ -1,0 +1,70 @@
+package com.cognizant.ccm.service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.cognizant.ccm.model.GatewaySettings;
+import com.cognizant.ccm.model.GatewaySettingsParameter;
+import com.cognizant.ccm.repository.GatewaySettingsParameterRepository;
+
+@Service
+@Transactional
+public class GatewaySettingsServiceImpl implements GatewaySettingsSerivce {
+
+	@Autowired
+	private GatewaySettingsParameterRepository gatewaySettingsParameterRepository;
+	
+	@Override
+	public List<GatewaySettings> getGatewaySettingsList() {
+		List<GatewaySettingsParameter> gatewaySettingsParameterList = gatewaySettingsParameterRepository.findAll();
+		List<GatewaySettings> gatewaySettingsList = new ArrayList<>();
+		gatewaySettingsParameterList.stream()
+			.forEach(g -> {
+				GatewaySettings gatewaySettings = new GatewaySettings();
+				gatewaySettings.setGatewaySettingsParameterId(g.getGatewaySettingsParameterId());
+				gatewaySettings.setFieldCode(g.getFieldCode());
+				gatewaySettings.setFieldName(g.getFieldName());
+				gatewaySettings.setFieldDescription(g.getFieldDescription());
+				gatewaySettings.setDataType(g.getDataType());
+				gatewaySettings.setIsrequired(g.isIsrequired());
+				gatewaySettings.setDataFormat(g.getDataFormat());
+				gatewaySettings.setFieldDefaultValue(g.getFieldDefaultValue());
+				gatewaySettings.setMaximumValue(g.getMaximumValue());
+				gatewaySettings.setMinimumValue(g.getMinimumValue());
+				gatewaySettings.setFieldValue(g.getFieldValue());
+				gatewaySettings.setAffectedModules(g.getAffectedModules());
+				gatewaySettings.setGatewayId(g.getGatewayId());
+				gatewaySettings.setCreatedon(g.getCreatedon());
+				gatewaySettings.setUpdatedon(g.getUpdatedon());
+				gatewaySettingsList.add(gatewaySettings);
+			});
+		return gatewaySettingsList;
+	}
+
+	@Override
+	public GatewaySettings getGatewaySettings(int id) {
+		GatewaySettingsParameter gatewaySettingsParameter = gatewaySettingsParameterRepository.findById(id).get();
+		GatewaySettings gatewaySettings = new GatewaySettings();
+		gatewaySettings.setGatewaySettingsParameterId(gatewaySettingsParameter.getGatewaySettingsParameterId());
+		gatewaySettings.setFieldCode(gatewaySettingsParameter.getFieldCode());
+		gatewaySettings.setFieldName(gatewaySettingsParameter.getFieldName());
+		gatewaySettings.setFieldDescription(gatewaySettingsParameter.getFieldDescription());
+		gatewaySettings.setDataType(gatewaySettingsParameter.getDataType());
+		gatewaySettings.setIsrequired(gatewaySettingsParameter.isIsrequired());
+		gatewaySettings.setDataFormat(gatewaySettingsParameter.getDataFormat());
+		gatewaySettings.setFieldDefaultValue(gatewaySettingsParameter.getFieldDefaultValue());
+		gatewaySettings.setMaximumValue(gatewaySettingsParameter.getMaximumValue());
+		gatewaySettings.setMinimumValue(gatewaySettingsParameter.getMinimumValue());
+		gatewaySettings.setFieldValue(gatewaySettingsParameter.getFieldValue());
+		gatewaySettings.setAffectedModules(gatewaySettingsParameter.getAffectedModules());
+		gatewaySettings.setGatewayId(gatewaySettingsParameter.getGatewayId());
+		gatewaySettings.setCreatedon(gatewaySettingsParameter.getCreatedon());
+		gatewaySettings.setUpdatedon(gatewaySettingsParameter.getUpdatedon());
+		return gatewaySettings;
+	}
+
+}

@@ -1,0 +1,7 @@
+package com.cognizant.ccm.exception;
+
+public class GatewaySettingsParametersNotFoundException extends Exception {
+	public GatewaySettingsParametersNotFoundException(String message) {
+		super(message);
+	}
+}

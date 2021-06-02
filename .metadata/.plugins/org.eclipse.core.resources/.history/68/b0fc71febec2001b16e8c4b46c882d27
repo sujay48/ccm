@@ -1,0 +1,57 @@
+package com.cognizant.ccm.service;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import org.junit.BeforeClass;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+
+import com.cognizant.ccm.exception.GatewaySettingsParametersNotFoundException;
+import com.cognizant.ccm.model.GatewaySettingsParameters;
+import com.cognizant.ccm.repository.GatewaySettingsParameterRepository;
+
+class GatewaySettingsServiceTest {
+
+	private GatewaySettingsSerivce gatewaySettingsService = new GatewaySettingsServiceImpl();
+	
+	GatewaySettingsParameters gatewaySettings = new GatewaySettingsParameters();
+	
+	@BeforeClass
+	void test_before() {
+		
+		gatewaySettings.setGatewaySettingsParameterId(1);
+		gatewaySettings.setFieldCode("F001");
+		gatewaySettings.setFieldName("Field Name");
+		gatewaySettings.setFieldDescription("Field Description");
+		gatewaySettings.setDataType("Data type");
+		gatewaySettings.setIsrequired(true);
+		gatewaySettings.setDataFormat("dd/MM/yyyy");
+		gatewaySettings.setFieldDefaultValue("Default Value");
+		gatewaySettings.setMaximumValue("Maximum");
+		gatewaySettings.setMinimumValue("Minimum");
+		gatewaySettings.setFieldValue("Field Value");
+		gatewaySettings.setAffectedModules("Affected Modules");
+		gatewaySettings.setGatewayId(1);
+		var date1 = new Date();
+		gatewaySettings.setCreatedon(date1);
+		var date2 = new Date();
+		gatewaySettings.setUpdatedon(date2);
+	}
+	
+	
+	@Mock
+	private GatewaySettingsParameterRepository gatewaySettingsParametersRepository;
+	
+	@Test
+	void test_GetGatewaySettingsList() throws GatewaySettingsParametersNotFoundException {
+		List<GatewaySettingsParameters> gatewaySettingsParametersList = new ArrayList<>();
+		gatewaySettingsParametersList.add(gatewaySettings);
+		Mockito.when(gatewaySettingsParametersRepository.findAll()).thenReturn(gatewaySettingsParametersList);
+		assertEquals(1, gatewaySettingsService.getGatewaySettingsList().size());
+	}
+}

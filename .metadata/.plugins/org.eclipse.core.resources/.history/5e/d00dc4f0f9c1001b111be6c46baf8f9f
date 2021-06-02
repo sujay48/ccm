@@ -1,0 +1,35 @@
+field.code.required=Field code is requried
+field.code.size
+
+field.name.required=Field name is requried
+field.name.size
+
+field.desc.required=Field desc is requried
+field.name.size
+
+data.type.required=Data type is requried
+data.type.size
+
+isrequired.required=Required type is true/false
+
+data.format.required=Data format is requried
+data.format.size
+
+field.default.value.required=Field default value is requried
+field.default.value.size
+
+maximum.value.required=Maximum Value is requried
+maximum.value.size
+
+minimum.value.required=Minimum value is requried
+minimum.value.size
+
+field.value.required=Field value is requried
+field.value.size
+
+affected.modules.reqiured=Affected Modules is requried
+affected.modules.size
+
+gateway.id.required=field code is requried
+
+

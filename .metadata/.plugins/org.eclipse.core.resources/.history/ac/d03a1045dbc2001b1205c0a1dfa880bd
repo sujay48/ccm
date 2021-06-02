@@ -1,0 +1,30 @@
+package com.cognizant.ccm.controller;
+
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+
+import com.cognizant.ccm.client.AuthorizationFeignClient;
+import com.cognizant.ccm.model.AuthResponse;
+import com.cognizant.ccm.service.GatewaySettingsSerivce;
+
+class GatewaySettingsControllerTest {
+
+	@Mock
+	AuthorizationFeignClient authorizationFeignClient;
+	
+	@Mock
+	GatewaySettingsSerivce gatewaySettingsSerivce;
+	
+	@InjectMocks
+	GatewaySettingsController gatewaySettingsController;
+	
+	@Test
+	void test_GetGatewaySettingsList() {
+		AuthResponse authResponse = new AuthResponse("","",true);
+		Mockito.when(authorizationFeignClient.getValidity(Mockito.anyString())).thenReturn(authResponse);
+	}
+	
+	
+}

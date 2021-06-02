@@ -1,0 +1,6 @@
+package com.cognizant.ccm.exception;
+
+class HandleMethodArguementNotValidTest {
+	void test_handleMethodArguementNotValid() {
+			}
+}

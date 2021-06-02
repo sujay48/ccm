@@ -1,0 +1,9 @@
+
+q	java:S1125"FDefine and throw a dedicated exception instead of using a generic one.(ˆƒ¼¿H‚	RMAJORZ
+CODE_SMELL
+U
+java:S14525"&Remove usage of generic wildcard type.(ˆƒ¼¿Hƒ	RCRITICALZ
+CODE_SMELL
+n
+java:S1126P"BReplace this if-then-else statement by a single method invocation.(ºÊÙõH„	RMINORZ
+CODE_SMELL

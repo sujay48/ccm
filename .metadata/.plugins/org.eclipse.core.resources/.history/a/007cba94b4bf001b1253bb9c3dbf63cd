@@ -1,0 +1,71 @@
+package com.cognizant.ccm.service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.cognizant.ccm.exception.GatewaySettingsParametersNotFoundException;
+import com.cognizant.ccm.model.GatewaySettings;
+import com.cognizant.ccm.model.GatewaySettingsParameters;
+import com.cognizant.ccm.repository.GatewaySettingsParameterRepository;
+
+@Service
+@Transactional
+public class GatewaySettingsServiceImpl implements GatewaySettingsSerivce {
+
+	@Autowired
+	private GatewaySettingsParameterRepository gatewaySettingsParameterRepository;
+
+	@Autowired
+	private GatewaySettingsMapper gatewaySettingsMapper;
+	
+	@Value("${exception.gateway.empty}")
+	private String emptyList;
+	
+	@Value("${Gateway Settings Parameter Not Found}")
+	private String notFound;
+
+	@Override
+	public List<GatewaySettings> getGatewaySettingsList() throws GatewaySettingsParametersNotFoundException {
+		List<GatewaySettingsParameters> gatewaySettingsParameterList = gatewaySettingsParameterRepository.findAll();
+		List<GatewaySettings> gatewaySettingsList = new ArrayList<>();
+		gatewaySettingsParameterList.stream().forEach(g -> {
+			GatewaySettings gatewaySettings = new GatewaySettings();
+			gatewaySettingsMapper.gatewaySettingsMapper(gatewaySettings, g);
+			gatewaySettingsList.add(gatewaySettings);
+		});
+		if(gatewaySettingsList.isEmpty()) {
+			throw new GatewaySettingsParametersNotFoundException(emptyList);
+		}
+		return gatewaySettingsList;
+	}
+
+	@Override
+	public GatewaySettings getGatewaySettings(int id) throws GatewaySettingsParametersNotFoundException {
+		GatewaySettingsParameters gatewaySettingsParameter = gatewaySettingsParameterRepository
+			.findById(id)
+			.orElseThrow(() -> new GatewaySettingsParametersNotFoundException(notFound));
+		GatewaySettings gatewaySettings = new GatewaySettings();
+		gatewaySettingsMapper.gatewaySettingsMapper(gatewaySettings, gatewaySettingsParameter);
+		return gatewaySettings;
+	}
+
+	@Override
+	public void addGatewayServiceParameters(GatewaySettings gatewaySettings) {
+		GatewaySettingsParameters gatewaySettingsParameters = new GatewaySettingsParameters();
+		gatewaySettingsMapper.gatewaySettingsParametersMapper(gatewaySettingsParameters, gatewaySettings);
+		gatewaySettingsParameterRepository.save(gatewaySettingsParameters);
+	}
+
+	@Override
+	public void deleteGatewayServiceParameter(int id) {
+		gatewaySettingsParameterRepository.deleteById(id);
+	}
+
+}

@@ -1,0 +1,10 @@
+package com.cognizant.ccm.exception;
+
+public class GatewaySettingsParametersNotFoundException extends Exception {
+	
+	private static final long serialVersionUID = 1L;
+
+	public GatewaySettingsParametersNotFoundException(String message) {
+		super(message);
+	}
+}

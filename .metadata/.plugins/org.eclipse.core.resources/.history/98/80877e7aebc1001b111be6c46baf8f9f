@@ -1,0 +1,13 @@
+spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.PostgreSQLDialect
+spring.jpa.hibernate.ddl-auto=create
+spring.datasource.url=jdbc:postgresql://localhost:5432/ccm
+spring.datasource.username=postgres
+spring.datasource.password=root
+
+# Hibernate configuration
+spring.jpa.hibernate.ddl-auto=validate
+
+exception.gateway.empty=Gateway Settings Parameters List is Empty
+exception.gateway.notfound=Gateway Settings Parameter Not Found
+
+feign.authorization.url=localhost:8083/auth

@@ -1,0 +1,49 @@
+package com.cognizant.ccm.service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.cognizant.ccm.model.GatewaySettings;
+import com.cognizant.ccm.model.GatewaySettingsParameters;
+import com.cognizant.ccm.repository.GatewaySettingsParameterRepository;
+
+@Service
+@Transactional
+public class GatewaySettingsServiceImpl implements GatewaySettingsSerivce {
+
+	@Autowired
+	private GatewaySettingsParameterRepository gatewaySettingsParameterRepository;
+	
+	@Override
+	public List<GatewaySettings> getGatewaySettingsList() {
+		List<GatewaySettingsParameters> gatewaySettingsParameterList = gatewaySettingsParameterRepository.findAll();
+		List<GatewaySettings> gatewaySettingsList = new ArrayList<>();
+		gatewaySettingsParameterList.stream()
+			.forEach(g -> {
+				GatewaySettings gatewaySettings = new GatewaySettings();
+				GatewaySettingsMapper.gatewayMapper(gatewaySettings, g);
+				gatewaySettingsList.add(gatewaySettings);
+			});
+		return gatewaySettingsList;
+	}
+
+	@Override
+	public GatewaySettings getGatewaySettings(int id) {
+		GatewaySettingsParameters gatewaySettingsParameter = gatewaySettingsParameterRepository.findById(id).get();
+		GatewaySettings gatewaySettings = new GatewaySettings();
+		GatewaySettingsMapper.gatewayMapper(gatewaySettings, gatewaySettingsParameter);
+		return gatewaySettings;
+	}
+
+	@Override
+	public void addGatewayServiceParameters(GatewaySettings gatewaySettings) {
+		GatewaySettingsParameters gatewaySettingsParameters = new GatewaySettingsParameters();
+		
+	}
+	
+
+}

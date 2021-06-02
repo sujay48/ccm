@@ -1,0 +1,51 @@
+package com.cognizant.ccm.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.cognizant.ccm.exception.GatewaySettingsParametersNotFoundException;
+import com.cognizant.ccm.model.GatewaySettings;
+import com.cognizant.ccm.service.GatewaySettingsSerivce;
+
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@RestController
+@RequestMapping("/gateway-settings")
+public class GatewaySettingsController {
+	
+	@Autowired
+	private GatewaySettingsSerivce gatewaySettingsService; 
+	
+	@GetMapping
+	public List<GatewaySettings> getGatewaySettingsList() throws GatewaySettingsParametersNotFoundException {
+		log.info("START : getGatewaySettingsList()");
+		return gatewaySettingsService.getGatewaySettingsList();
+	}
+	
+	@GetMapping("/{id}")
+	public GatewaySettings getGatewaySettings(@PathVariable int id) throws GatewaySettingsParametersNotFoundException {
+		log.info("START : getGatewaySettings()");
+		return gatewaySettingsService.getGatewaySettings(id);
+	}
+	
+	@PostMapping
+	public void addGatewaySettingsParameters(@RequestBody GatewaySettings gatewaySettings) {
+		log.info("START : addGatewaySettingsParameters()");
+		gatewaySettingsService.addGatewayServiceParameters(gatewaySettings);
+	}
+	
+	@DeleteMapping("/{id}")
+	public void removeGatewaySettingsParameter(@PathVariable int id) {
+		log.info("START : removeGatewaySettingsParameter()");
+		gatewaySettingsService.deleteGatewayServiceParameter(id);
+	}
+}

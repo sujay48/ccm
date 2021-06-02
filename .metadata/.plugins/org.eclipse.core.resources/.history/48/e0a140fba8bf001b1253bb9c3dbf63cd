@@ -1,0 +1,25 @@
+package com.cognizant.ccm.service;
+
+import com.cognizant.ccm.model.GatewaySettings;
+import com.cognizant.ccm.model.GatewaySettingsParameters;
+
+public class GatewaySettingsMapper {
+	
+	public static void gatewayMapper(GatewaySettings gatewaySettings, GatewaySettingsParameters gatewaySettingsParameters) {
+		gatewaySettings.setGatewaySettingsParameterId(gatewaySettingsParameters.getGatewaySettingsParameterId());
+		gatewaySettings.setFieldCode(gatewaySettingsParameters.getFieldCode());
+		gatewaySettings.setFieldName(gatewaySettingsParameters.getFieldName());
+		gatewaySettings.setFieldDescription(gatewaySettingsParameters.getFieldDescription());
+		gatewaySettings.setDataType(gatewaySettingsParameters.getDataType());
+		gatewaySettings.setIsrequired(gatewaySettingsParameters.isIsrequired());
+		gatewaySettings.setDataFormat(gatewaySettingsParameters.getDataFormat());
+		gatewaySettings.setFieldDefaultValue(gatewaySettingsParameters.getFieldDefaultValue());
+		gatewaySettings.setMaximumValue(gatewaySettingsParameters.getMaximumValue());
+		gatewaySettings.setMinimumValue(gatewaySettingsParameters.getMinimumValue());
+		gatewaySettings.setFieldValue(gatewaySettingsParameters.getFieldValue());
+		gatewaySettings.setAffectedModules(gatewaySettingsParameters.getAffectedModules());
+		gatewaySettings.setGatewayId(gatewaySettingsParameters.getGatewayId());
+		gatewaySettings.setCreatedon(gatewaySettingsParameters.getCreatedon());
+		gatewaySettings.setUpdatedon(gatewaySettingsParameters.getUpdatedon());
+	}
+}
