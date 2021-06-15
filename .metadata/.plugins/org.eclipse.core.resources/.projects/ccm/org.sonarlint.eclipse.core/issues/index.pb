@@ -45,3 +45,7 @@ Fsrc/test/java/com/cognizant/ccm/service/GatewaySettingsMapperTest.java,d\0\d0f
 Msrc/test/java/com/cognizant/ccm/controller/GatewaySettingsControllerTest.java,c\0\c011fe89c21578e5f293c7ac07766d4bf9844232
 7
 pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
+Y
+)src/main/resources/application.properties,0\6\06f65155ec73600b9fc5c4dc2883d4bb84d8e284
+`
+0src/main/java/com/cognizant/ccm/RedisConfig.java,3\6\36c87aaded252ea65e66273d1fe0aec70de149a6

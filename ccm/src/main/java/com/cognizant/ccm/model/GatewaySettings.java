@@ -1,5 +1,6 @@
 package com.cognizant.ccm.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.validation.constraints.NotEmpty;
@@ -18,8 +19,12 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class GatewaySettings {
+public class GatewaySettings implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int gatewaySettingsParameterId;
 	@NotEmpty(message = "{field.code.required}")
 	@Size(min = 2, max = 10, message = "{field.code.size}")

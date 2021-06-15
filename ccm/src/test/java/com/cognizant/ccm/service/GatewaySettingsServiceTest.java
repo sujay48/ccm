@@ -27,10 +27,10 @@ class GatewaySettingsServiceTest {
 
 	@Mock
 	private GatewaySettingsMapper gatewaySettingsMapper;
-	
+
 	@InjectMocks
 	private GatewaySettingsServiceImpl gatewaySettingsServiceImpl;
-	
+
 	private GatewaySettingsParameters gatewaySettings = new GatewaySettingsParameters();
 
 	@Test
@@ -40,32 +40,49 @@ class GatewaySettingsServiceTest {
 		Mockito.when(gatewaySettingsParametersRepository.findAll()).thenReturn(gatewaySettingsParametersList);
 		assertEquals(1, gatewaySettingsServiceImpl.getGatewaySettingsList().size());
 	}
-	
+
 	@Test
 	void test_GetGatewaySettingsListFail() {
 		Mockito.when(gatewaySettingsParametersRepository.findAll()).thenReturn(new ArrayList<>());
-		assertThrows(GatewaySettingsParametersNotFoundException.class, () -> gatewaySettingsServiceImpl.getGatewaySettingsList());
+		assertThrows(GatewaySettingsParametersNotFoundException.class,
+				() -> gatewaySettingsServiceImpl.getGatewaySettingsList());
 	}
-	
+
 	@Test
 	void test_GetGatewaySettings() throws GatewaySettingsParametersNotFoundException {
 		Optional<GatewaySettingsParameters> gatewaySettingsParameters = Optional.ofNullable(gatewaySettings);
-		Mockito.when(gatewaySettingsParametersRepository.findById(Mockito.anyInt())).thenReturn(gatewaySettingsParameters);
+		Mockito.when(gatewaySettingsParametersRepository.findById(Mockito.anyInt()))
+				.thenReturn(gatewaySettingsParameters);
 		assertEquals(0, gatewaySettingsServiceImpl.getGatewaySettings(1).getGatewaySettingsParameterId());
 	}
-	
+
 	@Test
 	void test_GetGatewaySettingsFail() {
 		Optional<GatewaySettingsParameters> gatewaySettingsParameters = Optional.empty();
-		Mockito.when(gatewaySettingsParametersRepository.findById(Mockito.anyInt())).thenReturn(gatewaySettingsParameters);
-		assertThrows(GatewaySettingsParametersNotFoundException.class, () -> gatewaySettingsServiceImpl.getGatewaySettings(1));
+		Mockito.when(gatewaySettingsParametersRepository.findById(Mockito.anyInt()))
+				.thenReturn(gatewaySettingsParameters);
+		assertThrows(GatewaySettingsParametersNotFoundException.class,
+				() -> gatewaySettingsServiceImpl.getGatewaySettings(1));
 	}
-	
+
 	@Test
 	void test_AddGatewayServiceParameters() {
 		var gatewaySettings = new GatewaySettings();
 		gatewaySettingsServiceImpl.addGatewayServiceParameters(gatewaySettings);
-		Mockito.verify(gatewaySettingsMapper, Mockito.times(1)).gatewaySettingsParametersMapper(Mockito.any(), Mockito.any());
+		Mockito.verify(gatewaySettingsMapper, Mockito.times(1)).gatewaySettingsParametersMapper(Mockito.any(),
+				Mockito.any());
 	}
-	
+
+	@Test
+	void test_RedisCache() throws GatewaySettingsParametersNotFoundException {
+		Optional<GatewaySettingsParameters> gatewaySettingsParameters = Optional.ofNullable(gatewaySettings);
+		Mockito.when(gatewaySettingsParametersRepository.findById(Mockito.anyInt()))
+				.thenReturn(gatewaySettingsParameters);
+
+		GatewaySettings gateway1 = gatewaySettingsServiceImpl.getGatewaySettings(0);
+		GatewaySettings gateway2 = gatewaySettingsServiceImpl.getGatewaySettings(0);
+
+		assertEquals(gateway1.getGatewaySettingsParameterId(), gateway2.getGatewaySettingsParameterId());
+		Mockito.verify(gatewaySettingsParametersRepository, Mockito.times(1)).findById(0);
+	}
 }

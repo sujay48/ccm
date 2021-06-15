@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -66,6 +67,8 @@ public class GatewaySettingsServiceImpl implements GatewaySettingsSerivce {
 	 * Gets Gateway Settings Parameter By Id,
 	 * Throws Exception if not found
 	 */
+	
+	@Cacheable(value = "GatewaySettings", key = "#id")
 	@Override
 	public GatewaySettings getGatewaySettings(int id) throws GatewaySettingsParametersNotFoundException {
 		log.info("START : getGatewaySettings()");
