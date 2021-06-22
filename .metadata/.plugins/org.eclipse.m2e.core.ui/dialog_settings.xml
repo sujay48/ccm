@@ -2,6 +2,8 @@
 <section name="Workbench">
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
+			<item value="E:\Cognizant\Assignment\consumer"/>
+			<item value="E:\Cognizant\Assignment\producer"/>
 			<item value="E:\Cognizant\Assignment\Authorization_Microservice"/>
 			<item value="E:\Cognizant\Assignment\ccm"/>
 		</list>

@@ -43,3 +43,7 @@ Fsrc/test/java/com/cognizant/authorization/model/MyUserDetailsTest.java,0\8\085
 Lsrc/test/java/com/cognizant/authorization/controller/AuthControllerTest.java,f\0\f0c5ce5a2ef51abf7e6fc975f7bbf88cf50cf3fa
 |
 Lsrc/test/java/com/cognizant/authorization/exception/GlobalExceptionTest.java,a\2\a222d190cb16974f2ef602faac68ef2ee68bb3d4
+à
+Xsrc/test/java/com/cognizant/authorization/AuthorizationMicroserviceApplicationTests.java,9\3\9392545cc25540de0ea640656ce89faf5f10b550
+Å
+Qsrc/test/java/com/cognizant/authorization/service/CustomerDetailsServiceTest.java,8\c\8c23b8de38ac0e1f0a05b23098de97ca28ba9960
